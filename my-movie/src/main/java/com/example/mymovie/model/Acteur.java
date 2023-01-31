@@ -1,15 +1,20 @@
 package com.example.mymovie.model;
 
-import java.util.Date;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.util.List;
 
 public class Acteur {
+    @ApiModelProperty(notes = "nom of the film",name="nom",required=true,value="test nom")
     private String nom;
+    @ApiModelProperty(notes = "prenom of the film",name="prenom",required=true,value="test prenom")
     private String prenom;
-    private Date datenaissance;
+    @ApiModelProperty(notes = "datenaissance of the film",name="datenaissance",required=true,value="test datenaissance")
+    private String datenaissance;
+    @ApiModelProperty(notes = "filmography of the film",name="filmographye",required=true,value="test filmography")
     private List<Film> filmography;
 
-    public Acteur(String nom, String prenom, Date dateNaissance) {
+    public Acteur(String nom, String prenom, String dateNaissance) {
         this.nom = nom;
         this.prenom = prenom;
         this.datenaissance = dateNaissance;
@@ -27,7 +32,7 @@ public class Acteur {
         return prenom;
     }
 
-    public Date getDateNaissance() {
+    public String getDateNaissance() {
         return datenaissance;
     }
 
