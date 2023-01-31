@@ -7,6 +7,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.text.ParseException;
@@ -91,22 +92,16 @@ public class MymovieController {
         return films;
     }
 
-    @ApiOperation(value = "Get list of film  by title in the System ", response = Iterable.class, tags = "getActeurs by title")
+    @ApiOperation(value = "Get list of film  by title in the System ", response = Iterable.class, tags = "getFilms by title")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Suceess|OK"),
             @ApiResponse(code = 401, message = "not authorized!"),
             @ApiResponse(code = 403, message = "forbidden!!!"),
             @ApiResponse(code = 404, message = "not found!!!") })
-    @GetMapping("/films/{title}")
-    public Film getFilmByTitre(@PathVariable String title) {
-        for (Film film : films) {
-            if (film.getTitle().equals(title)) {
-                return film;
-            }
-        }
-        return null;
+    @RequestMapping(value = "/getFilm/{title}")
+    public Film getFilm(@PathVariable(value = "title") String title) {
+        return films.stream().filter(x -> x.getTitle().equalsIgnoreCase(title)).collect(Collectors.toList()).get(0);
     }
-
 
     @ApiOperation(value = "Get list of films by anne in the System ", response = Iterable.class, tags = "getfilms by anne")
     @ApiResponses(value = {
@@ -114,14 +109,9 @@ public class MymovieController {
             @ApiResponse(code = 401, message = "not authorized!"),
             @ApiResponse(code = 403, message = "forbidden!!!"),
             @ApiResponse(code = 404, message = "not found!!!") })
-    @GetMapping("/films/{annee}")
-    public Film getFilmByAnnee(@PathVariable String datesortie) {
-        for (Film film : films) {
-            if (film.getDatesortie().equals(datesortie)) {
-                return film;
-            }
-        }
-        return null;
+    @RequestMapping(value = "/getFilmAnne/{anne}")
+    public Film getFilmByAnne(@PathVariable(value = "anne") String anne) {
+        return films.stream().filter(x -> x.getDatesortie().equalsIgnoreCase(anne)).collect(Collectors.toList()).get(0);
     }
 
 
