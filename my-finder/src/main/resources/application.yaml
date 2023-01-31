@@ -1,3 +1,6 @@
+server:
+  port: 8081    #port number
+
 eureka:
   instance:
     leaseRenewalIntervalInSeconds: 5
@@ -12,7 +15,7 @@ eureka:
 
 spring:
   application:
-    name: my-movie
+    name: my-finder
 
 management:
   security:
